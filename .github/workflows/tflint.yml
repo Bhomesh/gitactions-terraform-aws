@@ -1,0 +1,37 @@
+name: tflint
+
+on: [push]
+
+jobs:
+  tflint:
+    name: tflint
+    runs-on: ubuntu-latest
+
+    env:
+        TFSEC_VERSION: 1.28.11
+        TFLINT_VERSION: 0.53.0
+        TF_VERSION: 1.9.8
+
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Install tflint
+        run: |
+            curl -L https://github.com/terraform-linters/tflint/releases/download/v${{ env.TFLINT_VERSION }}/tflint_linux_amd64 > tflint
+            chmod +x tflint
+            ./tflint --version
+            
+      - name: Install tfsec
+        run: |
+            curl -L https://github.com/aquasecurity/tfsec/releases/download/v${{ env.TFSEC_VERSION }}/tfsec-linux-amd64 > tfsec
+            chmod +x tfsec
+            ./tfsec --version
+  
+
+
+    
