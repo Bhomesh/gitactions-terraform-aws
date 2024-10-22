@@ -1,7 +1,7 @@
 variable "region" {
-  description = "The region to deploy the resources"
+  description = "The AWS region to deploy resources in"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"  # or whatever your default was
 }
 
 variable "instance_type" {
@@ -21,4 +21,3 @@ variable "ami" {
   type        = string
   default     = "ami-0557a15b87f6559cf"
 }
-
