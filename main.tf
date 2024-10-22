@@ -1,9 +1,14 @@
 terraform {
-  required_version = ">= 1.0.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"  # Use an appropriate version constraint
+    }
+  }
 }
 
 provider "aws" {
-  region = var.region
+  region = var.aws_region
 }
 
 module "ec2" {
