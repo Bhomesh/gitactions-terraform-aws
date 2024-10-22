@@ -87,5 +87,5 @@ For support, please open an issue in the GitHub repository or contact the mainta
 
 ---
 <div align="center">
-Made with ❤️ by [Bhomesh](https://github.com/bhomesh)
+Made with ❤️ by <a href="https://github.com/Bhomesh">Bhomesh</a>
 </div>
