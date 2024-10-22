@@ -1,19 +1,17 @@
-name: linting and security check
+name: Linting, Security Check, and Terraform Operations
 
-on: [push]
+on:
+  push:
+    branches:
+      - main  # This ensures the workflow runs on pushes to the main branch
+  workflow_dispatch:  # This allows manual triggering
 
 jobs:
   check:
-    name: linting and security check
+    name: Linting and Security Check
     runs-on: ubuntu-latest
 
-    # env:
-    #     TFSEC_VERSION: 1.28.11
-    #     TFLINT_VERSION: 0.53.0
-    #     TF_VERSION: 1.9.8
-
     steps:
-    
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -32,19 +30,33 @@ jobs:
           chmod +x tfsec
           sudo mv tfsec /usr/local/bin/
 
-  init:
-    name: init
+      - name: Run tflint
+        run: tflint
+
+      - name: Run tfsec
+        run: tfsec
+
+  terraform_operations:
+    name: Terraform Init and Plan
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: terraform init
-        run: |
-          terraform init
-      
-      - name: terraform plan
-        run: |
-          terraform plan
-      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
