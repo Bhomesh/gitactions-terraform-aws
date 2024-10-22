@@ -37,6 +37,9 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
       - name: terraform init
         run: |
           terraform init
