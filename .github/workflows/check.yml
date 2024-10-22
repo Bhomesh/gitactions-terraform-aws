@@ -37,7 +37,11 @@ jobs:
     needs: check
     runs-on: ubuntu-latest
     steps:
-      - name: 
+      - name: terraform init
         run: |
           terraform init
-
+      
+      - name: terraform plan
+        run: |
+          terraform plan
+      
