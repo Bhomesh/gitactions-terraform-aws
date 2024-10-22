@@ -14,7 +14,13 @@ This project leverages Terraform to deploy and manage EC2 instances on AWS, with
 - Terraform code linting and validation
 
 ## 🏗️ Project Structure
-
+```
+.
+├── .github/workflows/check.yml
+├── .github/workflows/deploy.yml
+├── main.tf
+├── variables.tf
+```
 
 ## Prerequisites
 
@@ -80,5 +86,6 @@ This project is licensed under the [MIT License](LICENSE).
 For support, please open an issue in the GitHub repository or contact the maintainers.
 
 ---
-
+<div align="center">
 Made with ❤️ by [Bhomesh](https://github.com/bhomesh)
+</div>
